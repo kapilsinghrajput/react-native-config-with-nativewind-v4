@@ -1,27 +1,35 @@
-import React, { useState, useRef } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, FlatList, TouchableOpacity } from 'react-native';
+import React, {useState, useRef} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Dimensions,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 
-const { width, height } = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 
 export default function OnboardScreen() {
   const slides = [
     {
       id: 1,
-      title: "Discover Best Places",
-      description: "Find amazing spots and hidden gems around you.",
-      image: require('../assets/images/rb_2267.png'), // Replace with a valid image path
+      title: 'Discover Best Places',
+      description: 'Find amazing spots and hidden gems around you.',
+      image: require('../assets/images/rb_2267.png'),
     },
     {
       id: 2,
-      title: "Best Society Areas",
-      description: "Explore the best areas suited for your lifestyle.",
-      image: require('../assets/images/rb_4423.png'), // Replace with a valid image path
+      title: 'Best Society Areas',
+      description: 'Explore the best areas suited for your lifestyle.',
+      image: require('../assets/images/rb_4423.png'),
     },
     {
       id: 3,
-      title: "Amazing Society Features",
-      description: "Experience top-notch amenities and services.",
-      image: require('../assets/images/rb_7085.png'), // Replace with a valid image path
+      title: 'Amazing Society Features',
+      description: 'Experience top-notch amenities and services.',
+      image: require('../assets/images/rb_7085.png'),
     },
   ];
 
@@ -32,16 +40,16 @@ export default function OnboardScreen() {
     if (currentIndex < slides.length - 1) {
       const nextIndex = currentIndex + 1;
       setCurrentIndex(nextIndex);
-      flatListRef.current.scrollToIndex({ index: nextIndex });
+      flatListRef.current.scrollToIndex({index: nextIndex});
     }
   };
 
-  const handleScroll = (event) => {
+  const handleScroll = event => {
     const newIndex = Math.round(event.nativeEvent.contentOffset.x / width);
     setCurrentIndex(newIndex);
   };
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({item}) => (
     <View style={styles.slide}>
       <Image source={item.image} style={styles.image} resizeMode="contain" />
       <Text style={styles.title}>{item.title}</Text>
@@ -57,20 +65,30 @@ export default function OnboardScreen() {
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={item => item.id.toString()}
         ref={flatListRef}
         onScroll={handleScroll}
-        scrollEventThrottle={16} // Ensures smooth updates
+        scrollEventThrottle={16}
       />
-      {currentIndex < slides.length - 1 ? (
-        <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
+      <View style={styles.dotContainer}>
+        {slides.map((_, index) => (
+          <View
+            key={index}
+            style={[styles.dot, currentIndex === index && styles.activeDot]}
+          />
+        ))}
+      </View>
+
+      <TouchableOpacity
+        activeOpacity={1}
+        style={styles.nextButton}
+        onPress={handleNext}>
+        {currentIndex < slides.length - 1 ? (
           <Text style={styles.nextText}>Next</Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity style={styles.getStartedButton}>
-          <Text style={styles.getStartedText}>Get Started</Text>
-        </TouchableOpacity>
-      )}
+        ) : (
+          <Text style={styles.nextText}>Get Started</Text>
+        )}
+      </TouchableOpacity>
     </View>
   );
 }
@@ -104,6 +122,23 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingHorizontal: 20,
   },
+  dotContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    position: 'absolute',
+    bottom: 100,
+    width: '100%',
+  },
+  dot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: '#ddd',
+    marginHorizontal: 5,
+  },
+  activeDot: {
+    backgroundColor: '#007BFF',
+  },
   nextButton: {
     position: 'absolute',
     bottom: 40,
@@ -122,7 +157,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 40,
     alignSelf: 'center',
-    backgroundColor: '#28A745',
+    backgroundColor: '#007BFF',
     paddingHorizontal: 40,
     paddingVertical: 12,
     borderRadius: 25,
