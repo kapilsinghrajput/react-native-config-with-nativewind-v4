@@ -1,0 +1,21 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/OpenSans_Condensed-Light.ttf",
+      "sha1": "36514e24ba6ec85d65770310c0c6dc345f8df204"
+    },
+    {
+      "path": "src/assets/fonts/OpenSans_Condensed-Regular.ttf",
+      "sha1": "02ff457da3d6a5cbd9b724d67ddfe04a475629e4"
+    },
+    {
+      "path": "src/assets/fonts/OpenSans_SemiCondensed-Bold.ttf",
+      "sha1": "0eaebb398eb9c4b76a4a4b35e14bfce27143a343"
+    },
+    {
+      "path": "src/assets/fonts/RubikWetPaint-Regular.ttf",
+      "sha1": "3f6b62bc0fed848896337e1975df515fd7a9f79b"
+    }
+  ]
+}

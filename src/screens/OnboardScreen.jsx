@@ -1,35 +1,27 @@
-import React, {useState, useRef} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  Dimensions,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, Text, StyleSheet, Image, Dimensions, FlatList, TouchableOpacity, Alert } from 'react-native';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
-export default function OnboardScreen() {
+export default function OnboardScreen({navigation}) {
   const slides = [
     {
       id: 1,
-      title: 'Discover Best Places',
-      description: 'Find amazing spots and hidden gems around you.',
-      image: require('../assets/images/rb_2267.png'),
+      title: "Discover Best Places",
+      description: "Find amazing spots and hidden gems around you.",
+      image: require('../assets/images/rb_2267.png'), 
     },
     {
       id: 2,
-      title: 'Best Society Areas',
-      description: 'Explore the best areas suited for your lifestyle.',
-      image: require('../assets/images/rb_4423.png'),
+      title: "Best Society Areas",
+      description: "Explore the best areas suited for your lifestyle.",
+      image: require('../assets/images/rb_4423.png'), 
     },
     {
       id: 3,
-      title: 'Amazing Society Features',
-      description: 'Experience top-notch amenities and services.',
-      image: require('../assets/images/rb_7085.png'),
+      title: "Amazing Society Features",
+      description: "Experience top-notch amenities and services.",
+      image: require('../assets/images/rb_7085.png'), 
     },
   ];
 
@@ -40,16 +32,16 @@ export default function OnboardScreen() {
     if (currentIndex < slides.length - 1) {
       const nextIndex = currentIndex + 1;
       setCurrentIndex(nextIndex);
-      flatListRef.current.scrollToIndex({index: nextIndex});
+      flatListRef.current.scrollToIndex({ index: nextIndex });
     }
   };
 
-  const handleScroll = event => {
+  const handleScroll = (event) => {
     const newIndex = Math.round(event.nativeEvent.contentOffset.x / width);
     setCurrentIndex(newIndex);
   };
 
-  const renderItem = ({item}) => (
+  const renderItem = ({ item }) => (
     <View style={styles.slide}>
       <Image source={item.image} style={styles.image} resizeMode="contain" />
       <Text style={styles.title}>{item.title}</Text>
@@ -65,7 +57,7 @@ export default function OnboardScreen() {
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={(item) => item.id.toString()}
         ref={flatListRef}
         onScroll={handleScroll}
         scrollEventThrottle={16}
@@ -74,21 +66,20 @@ export default function OnboardScreen() {
         {slides.map((_, index) => (
           <View
             key={index}
-            style={[styles.dot, currentIndex === index && styles.activeDot]}
+            style={[
+              styles.dot,
+              currentIndex === index && styles.activeDot,
+            ]}
           />
         ))}
       </View>
 
-      <TouchableOpacity
-        activeOpacity={1}
-        style={styles.nextButton}
-        onPress={handleNext}>
-        {currentIndex < slides.length - 1 ? (
-          <Text style={styles.nextText}>Next</Text>
-        ) : (
-          <Text style={styles.nextText}>Get Started</Text>
-        )}
-      </TouchableOpacity>
+        <TouchableOpacity activeOpacity={1} style={styles.nextButton} onPress={handleNext}>
+            {currentIndex < slides.length-1?( <Text  style={styles.nextText}>Next</Text>):( <Text onPress={()=> navigation.navigate("LogingScreen") } style={styles.nextText}>Get Started</Text>)}
+         
+        </TouchableOpacity>
+    
+    
     </View>
   );
 }
