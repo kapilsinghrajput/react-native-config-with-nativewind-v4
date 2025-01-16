@@ -42,7 +42,7 @@ export default function MainScreen() {
             }
 
             return (
-              <Icon
+              <Icon 
                 name={iconName}
                 size={28}
                 color={focused ? '#272947' : 'gray'}

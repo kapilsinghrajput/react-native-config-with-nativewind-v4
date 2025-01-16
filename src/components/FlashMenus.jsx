@@ -98,8 +98,8 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 5, // Shadow for Android
-    shadowColor: '#000', // Shadow for iOS
+    elevation: 5, 
+    shadowColor: '#000',
     shadowOffset: {width: 0, height: 3},
     shadowOpacity: 0.1,
     shadowRadius: 4,

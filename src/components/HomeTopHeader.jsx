@@ -1,21 +1,24 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 
 const HomeTopHeader = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       {/* User Info */}
       <View style={styles.userInfo}>
         <Image
-          source={{ uri: 'https://via.placeholder.com/50' }} 
+          source={require("../assets/images/visitorThreat.png")} 
           style={styles.profileImage}
         />
         <View>
           <Text style={styles.greeting}>Hi kapil singh</Text>
           <Text style={styles.societyInfo}>A-420 | Bloom society</Text>
         </View>
-        <TouchableOpacity style={styles.notificationIcon}>
+        <TouchableOpacity style={styles.notificationIcon} onPress={()=>navigation.navigate("Notification")} >
           <Icon name="notifications-outline" size={24} color="#000" />
           <View style={styles.notificationBadge} />
         </TouchableOpacity>

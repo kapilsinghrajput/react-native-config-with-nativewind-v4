@@ -12,8 +12,8 @@ const App = () => {
     <SafeAreaProvider>
       <GestureHandlerRootView style={{flex: 1}}>
         <NavigationContainer ref={navigationRef}>
-          {/* <StacksRoutes /> */}
-          <MainScreen/>
+          <StacksRoutes />
+          {/* <MainScreen/> */}
         </NavigationContainer>
       </GestureHandlerRootView>
     </SafeAreaProvider>
